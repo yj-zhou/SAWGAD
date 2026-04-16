@@ -1,0 +1,36 @@
+[project]
+name = "sawgad"
+version = "0.1.0"
+description = "Synthetic Anomaly guided Weakly-supervised Graph Anomaly Detection"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "torch==2.4.0",
+    "dgl==2.4.0",
+    "numpy>=1.26,<2.0",
+    "scikit-learn>=1.4",
+    "tqdm>=4.66",
+    "optuna>=3.6",
+    "matplotlib>=3.10.8",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["sawgad"]
+
+[[tool.uv.index]]
+name = "pytorch-cu118"
+url = "https://download.pytorch.org/whl/cu118"
+explicit = true
+
+[tool.uv]
+find-links = ["https://data.dgl.ai/wheels/torch-2.4/cu118/repo.html"]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu118" }
+
+[project.scripts]
+sawgad = "sawgad.main:main"
